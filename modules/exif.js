@@ -7,7 +7,7 @@ const getCoordinates = (img) => {
     try {
       new ExifImage({image: img}, function(error, exifData) {
         if (error) {
-          // console.log('Error: ' + error.message);
+           console.log('Error: ' + error.message);
           reject();
         } else {
           if (exifData.gps.GPSLatitude) {

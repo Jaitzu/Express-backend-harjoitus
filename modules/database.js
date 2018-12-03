@@ -79,6 +79,33 @@ const del = (data, connection) => {
         },
     );
 };
+const login = (data, connection, callback) => {
+    // simple query
+    connection.execute(
+        'SELECT * FROM bc_users WHERE email = ?;',
+        data,
+        (err, results, fields) => {
+            console.log(results); // results contains rows returned by server
+            // console.log(fields); // fields contains extra meta data about results, if available
+            console.log(err);
+            callback(results);
+        },
+    );
+};
+
+const register = (data, connection, callback) => {
+    // simple query
+    connection.execute(
+        'INSERT INTO bc_users (email, passwd) VALUES (?, ?);',
+        data,
+        (err, results, fields) => {
+            console.log(results); // results contains rows returned by server
+            // console.log(fields); // fields contains extra meta data about results, if available
+            console.log(err);
+            callback();
+        },
+    );
+};
 
 module.exports = {
     connect: connect,
@@ -87,4 +114,6 @@ module.exports = {
     update: update,
     del: del,
     search: search,
+    login: login,
+    register: register,
 };
